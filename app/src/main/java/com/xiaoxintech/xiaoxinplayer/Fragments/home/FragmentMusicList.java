@@ -126,6 +126,10 @@ public class FragmentMusicList extends Fragment {
                 queue.add(getSong(musicUrl));
             }
             PlayEvent.getDefault().setQueue(queue);
+            PlayEvent.getDefault().setAction(PlayEvent.Action.INIT);
+            if (mMyBinder != null) {
+                mMyBinder.callMusicService(PlayEvent.getDefault());
+            }
         }
     };
 
@@ -144,7 +148,6 @@ public class FragmentMusicList extends Fragment {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mMyBinder = (PlayerService.MyBinder) service;
-            mMyBinder.init(PlayEvent.getDefault());
         }
 
         @Override

@@ -8,7 +8,7 @@ public class HttpUtils {
     private static final OkHttpClient okHttpClient = new OkHttpClient();
 //    private static String rootURL = "http://10.86.92.81:8080/";
 //
-    private static String rootURL = "http://192.168.123.232:8080/";
+    private static String rootURL = "http://amani.cf:1024/";
     public static String GetFileList(String mUrl) {
         mUrl = rootURL + mUrl;
         Request request = new Request.Builder()
