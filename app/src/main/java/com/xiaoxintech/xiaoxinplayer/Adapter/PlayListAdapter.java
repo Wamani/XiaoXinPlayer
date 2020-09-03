@@ -1,39 +1,37 @@
-package com.xiaoxintech.xiaoxinplayer.Fragments.home;
+package com.xiaoxintech.xiaoxinplayer.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.xiaoxintech.xiaoxinplayer.Data.Music;
+import com.xiaoxintech.xiaoxinplayer.Data.PlayList;
 import com.xiaoxintech.xiaoxinplayer.R;
 
 import java.util.ArrayList;
 
-public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.ViewHolder> {
-    private ArrayList<Music> mMusicList;
+public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHolder> {
+    private ArrayList<PlayList> mPlayNameList;
     private OnItemClickListener onItemClickListener;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView musicName;
-        TextView musicAuthor;
+        TextView playListName;
 
         public ViewHolder (View view)
         {
             super(view);
 //            fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
-            musicName = (TextView) view.findViewById(R.id.musicName);
-            musicAuthor = (TextView) view.findViewById(R.id.musicAuthor);
+            playListName = (TextView) view.findViewById(R.id.playListName);
         }
     }
 
-    public MusicListAdapter(ArrayList <Music> musicList){
-        mMusicList = musicList;
+    public PlayListAdapter(ArrayList <PlayList> playList){
+        mPlayNameList = playList;
     }
     // ① 定义点击回调接口
     public interface OnItemClickListener {
-        void onItemClick(View view, int position, ArrayList<Music> musicList);
-        void onItemLongClick(View view, int position, ArrayList<Music> musicList);
+        void onItemClick(View view, int position, ArrayList<PlayList> musicList);
+        void onItemLongClick(View view, int position, ArrayList<PlayList> musicList);
     }
 
     // ② 定义一个设置点击监听器的方法
@@ -42,15 +40,15 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_playlist,parent,false);
         final ViewHolder holder = new ViewHolder(view);
-        holder.musicName.setSelected(true);
+        holder.playListName.setSelected(true);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(onItemClickListener != null) {
                     int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemClick(holder.itemView, pos,mMusicList);
+                    onItemClickListener.onItemClick(holder.itemView, pos, mPlayNameList);
                 }
             }
         });
@@ -60,17 +58,12 @@ public class MusicListAdapter extends RecyclerView.Adapter<MusicListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
 
-        Music music = mMusicList.get(position);
-//        holder.fruitImage.setImageResource(fruit.getImageId());
-
-        String[] musicName = music.getName().split("/");
-        String[] names = musicName[musicName.length - 1].split("\\.");
-        holder.musicName.setText(names[names.length - 2].replace(" ", ""));
-        holder.musicAuthor.setText(musicName[musicName.length - 2].replace(" ", ""));
+        PlayList playList = mPlayNameList.get(position);
+        holder.playListName.setText(playList.getName());
     }
 
     @Override
     public int getItemCount(){
-        return mMusicList.size();
+        return mPlayNameList.size();
     }
 }

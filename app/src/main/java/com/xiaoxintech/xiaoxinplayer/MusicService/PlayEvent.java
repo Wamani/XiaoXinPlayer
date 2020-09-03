@@ -24,7 +24,7 @@ public class PlayEvent {
     private List<Song> mQueue;
     private int seekTo;
     private int queueIndex;
-    private MusicPlayer.PlayMode mode;
+    private MusicPlayer.PlayMode mode = MusicPlayer.PlayMode.LOOP;
     public Song getSong() {
         return mSong;
     }

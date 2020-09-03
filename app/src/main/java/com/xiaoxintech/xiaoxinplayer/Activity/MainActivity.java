@@ -1,4 +1,4 @@
-package com.xiaoxintech.xiaoxinplayer;
+package com.xiaoxintech.xiaoxinplayer.Activity;
 
 import android.app.Application;
 import android.content.Context;
@@ -17,6 +17,7 @@ import com.xiaoxintech.xiaoxinplayer.Fragments.home.FragmentHome;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentMessage;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentMine;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentSettings;
+import com.xiaoxintech.xiaoxinplayer.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 if (homeFragment==null){
                     homeFragment=new FragmentHome();
                     ft.add(R.id.home_content,homeFragment);
-                    Log.e(TAG, "setTabSelect: eeeeee" );
                 }else {
                     ft.show(homeFragment);
                 }

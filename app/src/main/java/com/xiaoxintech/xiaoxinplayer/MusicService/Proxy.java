@@ -5,7 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.danikula.videocache.file.FileNameGenerator;
-import com.xiaoxintech.xiaoxinplayer.MainActivity;
+import com.xiaoxintech.xiaoxinplayer.Activity.MainActivity;
 
 import java.io.File;
 
