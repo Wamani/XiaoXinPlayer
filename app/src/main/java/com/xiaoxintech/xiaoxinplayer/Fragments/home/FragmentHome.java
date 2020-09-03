@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
+import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentPlayList;
 import com.xiaoxintech.xiaoxinplayer.R;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class FragmentHome extends Fragment  {
     private ViewPager viewPager;
     private ArrayList<Fragment> list=new ArrayList<>();
     private ArrayList<String> title=new ArrayList<>();
-    private FragmentMusicList fragmentMusicList;
+    private FragmentPlayList fragmentMusicList;
     private FragmentSheet fragmentMusicSheet;
     private TabLayout tableLayout;
 
@@ -32,8 +33,8 @@ public class FragmentHome extends Fragment  {
         viewPager=view.findViewById(R.id.pager);
         //初始化tablayout
         tableLayout=view.findViewById(R.id.tab);
-        title.add("歌曲列表");
         title.add("我的歌单");
+        title.add("歌手列表");
         //初始化fragment的列表
         setList();
         PagerAdapter adapter=new PagerAdapter(getChildFragmentManager(),list,title);
@@ -47,7 +48,7 @@ public class FragmentHome extends Fragment  {
 
     private void setList() {
         if (fragmentMusicList ==null){
-            fragmentMusicList = new FragmentMusicList();
+            fragmentMusicList = new FragmentPlayList();
             list.add(fragmentMusicList);
         }
         if (fragmentMusicSheet ==null){

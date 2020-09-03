@@ -27,30 +27,30 @@ public class PlayerService extends Service {
         public void callMusicService(PlayEvent playEvent){
             switch (playEvent.getAction()) {
                 case INIT:
-                    MusicPlayer.getPlayer().setQueue(playEvent.getQueue(), MusicPlayer.getPlayer().getCurrentSongIndex());
+                    MusicPlayer.getDefault().setQueue(playEvent.getQueue(), MusicPlayer.getDefault().getCurrentSongIndex());
                     break;
                 case PlayTarget:
-                    MusicPlayer.getPlayer().playTargetSong(playEvent.getIndex());
+                    MusicPlayer.getDefault().playTargetSong(playEvent.getIndex());
                 case PLAY:
-                    MusicPlayer.getPlayer().playNow();
+                    MusicPlayer.getDefault().playNow();
                     break;
                 case NEXT:
-                    MusicPlayer.getPlayer().next();
+                    MusicPlayer.getDefault().next();
                     break;
                 case STOP:
-                    MusicPlayer.getPlayer().pause();
+                    MusicPlayer.getDefault().pause();
                     break;
                 case RESUME:
-                    MusicPlayer.getPlayer().resume();
+                    MusicPlayer.getDefault().resume();
                     break;
                 case PREVIOUS:
-                    MusicPlayer.getPlayer().previous();
+                    MusicPlayer.getDefault().previous();
                     break;
                 case SEEK:
-                    MusicPlayer.getPlayer().seekTo(playEvent.getSeekTo());
+                    MusicPlayer.getDefault().seekTo(playEvent.getSeekTo());
                     break;
                 case MODE:
-                    MusicPlayer.getPlayer().setPlayMode(playEvent.getMode());
+                    MusicPlayer.getDefault().setPlayMode(playEvent.getMode());
                     break;
             }
         }

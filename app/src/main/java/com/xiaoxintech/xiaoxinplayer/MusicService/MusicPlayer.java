@@ -5,8 +5,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Message;
 import com.danikula.videocache.HttpProxyCacheServer;
-import com.xiaoxintech.xiaoxinplayer.MainActivity;
-import com.xiaoxintech.xiaoxinplayer.PlayingActivity;
+import com.xiaoxintech.xiaoxinplayer.Activity.MainActivity;
+import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentPlaying;
 import wseemann.media.FFmpegMediaMetadataRetriever;
 
 import java.io.IOException;
@@ -15,7 +15,6 @@ import java.util.*;
 
 public class MusicPlayer implements MediaPlayer.OnCompletionListener {
 
-    private static MusicPlayer player = new MusicPlayer();
     private MediaPlayer mMediaPlayer;
     private List<Song> mQueue;
     private static int mQueueIndex;
@@ -24,16 +23,18 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {
     public enum PlayMode {
         LOOP, RANDOM, REPEAT
     }
-
+    public static MusicPlayer musicPlayer;
+    public static MusicPlayer getDefault() {
+        if (musicPlayer == null) {
+            synchronized (MusicPlayer.class) {
+                if (musicPlayer == null) {
+                    musicPlayer =  new MusicPlayer();
+                }
+            }
+        }
+        return musicPlayer;
+    }
     private HttpProxyCacheServer proxy;
-
-    public static MusicPlayer getPlayer() {
-        return player;
-    }
-
-    public static void setPlayer(MusicPlayer player) {
-        MusicPlayer.player = player;
-    }
 
     public MusicPlayer() {
         mMediaPlayer = new ManagedMediaPlayer();
@@ -63,14 +64,6 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {
             mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
-                    String[] values = getNowPlaying().getPath().split("/");
-                    Message ms=Message.obtain();
-                    Bundle bundle=new Bundle();
-                    bundle.putString("duration_string",getStringDuration(getOnlineDuration()));
-                    bundle.putInt("duration_int", getOnlineDuration());
-                    bundle.putString("name",values[values.length - 1]);
-                    ms.setData(bundle);
-                    PlayingActivity.handler.sendMessage(ms);
                     seekPlayProgress();
                     mMediaPlayer.start();
                 }
@@ -233,17 +226,22 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {
             @Override
             public void run() {
                 //开启线程定时获取当前播放进度
-                int currentposition=mMediaPlayer.getCurrentPosition();
+                int currentPosition = getCurrentPosition();
+                String[] values = getNowPlaying().getPath().split("/");
+
                 //利用message给主线程发消息更新seekbar进度
                 Message ms=Message.obtain();
                 Bundle bundle=new Bundle();
-                bundle.putInt("current_position",currentposition);
-                String current_duration_str = getStringDuration(currentposition);
+                bundle.putInt("current_position",currentPosition);
+                String current_duration_str = getStringDuration(currentPosition);
                 bundle.putString("current_position_str",current_duration_str);
+                bundle.putString("duration_string",getStringDuration(getOnlineDuration()));
+                bundle.putInt("duration_int", getOnlineDuration());
+                bundle.putString("name",values[values.length - 1]);
                 //设置发送的消息内容
                 ms.setData(bundle);
                 //发送消息
-                PlayingActivity.timerHandler.sendMessage(ms);
+                FragmentPlaying.timerHandler.sendMessage(ms);
             }
         };
         timer.schedule(task,300,500);

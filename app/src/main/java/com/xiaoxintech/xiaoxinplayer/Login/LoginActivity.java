@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xiaoxintech.xiaoxinplayer.MainActivity;
+import com.xiaoxintech.xiaoxinplayer.Activity.MainActivity;
 import com.xiaoxintech.xiaoxinplayer.R;
 
 public class LoginActivity extends AppCompatActivity {

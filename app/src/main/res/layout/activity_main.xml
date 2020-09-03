@@ -34,14 +34,14 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/home" />
+                    android:src="@mipmap/music" />
 
             <TextView
                     android:id="@+id/t1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="主页" />
+                    android:text="音乐" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,14 +58,14 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/message" />
+                    android:src="@mipmap/videos" />
 
             <TextView
                     android:id="@+id/t2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="消息" />
+                    android:text="视频" />
         </LinearLayout>
 
         <LinearLayout
