@@ -10,10 +10,10 @@ import com.xiaoxintech.xiaoxinplayer.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentMessage#newInstance} factory method to
+ * Use the {@link FragmentVideo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentMessage extends Fragment {
+public class FragmentVideo extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -23,7 +23,7 @@ public class FragmentMessage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public FragmentMessage() {
+    public FragmentVideo() {
         // Required empty public constructor
     }
 
@@ -33,11 +33,11 @@ public class FragmentMessage extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_message.
+     * @return A new instance of fragment fragment_video.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentMessage newInstance(String param1, String param2) {
-        FragmentMessage fragment = new FragmentMessage();
+    public static FragmentVideo newInstance(String param1, String param2) {
+        FragmentVideo fragment = new FragmentVideo();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,6 +58,6 @@ public class FragmentMessage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false);
+        return inflater.inflate(R.layout.fragment_video, container, false);
     }
 }

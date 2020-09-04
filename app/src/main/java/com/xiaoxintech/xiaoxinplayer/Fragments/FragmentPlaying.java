@@ -43,7 +43,6 @@ public class FragmentPlaying extends Fragment {
     PlayerService.MyBinder mMyBinder;
     Intent playerServiceIntent;
 
-    private ImageView cd_view;
     ObjectAnimator animation;
 
     @Override
@@ -74,7 +73,7 @@ public class FragmentPlaying extends Fragment {
         play_next = view.findViewById(R.id.playing_next);
         play_pre = view.findViewById(R.id.playing_pre);
         music_list = view.findViewById(R.id.playing_playlist);
-        cd_view = view.findViewById(R.id.cd_view);
+        ImageView cd_view = view.findViewById(R.id.cd_view);
         animation = ObjectAnimator.ofFloat(cd_view, "rotation", 0, 360);
         animation.setDuration(10000);
         animation.setRepeatCount(-1);
@@ -115,23 +114,6 @@ public class FragmentPlaying extends Fragment {
                 mMyBinder.callMusicService(PlayEvent.getDefault());
             }
         });
-
-        switch (play_index){
-            case 0:
-                play_mode.setImageDrawable(getResources().getDrawable(R.drawable.play_icn_loop));
-                ShowToast("顺序播放");
-                break;
-            case 1:
-                play_mode.setImageDrawable(getResources().getDrawable(R.drawable.play_icn_shuffle));
-                ShowToast("随机播放");
-                break;
-            case 2:
-                play_mode.setImageDrawable(getResources().getDrawable(R.drawable.play_icn_one));
-                ShowToast("单曲循环");
-                break;
-            default:
-                break;
-        }
 
         setPlayModeIcon(play_index);
         play_mode.setOnClickListener(new View.OnClickListener() {
@@ -216,16 +198,16 @@ public class FragmentPlaying extends Fragment {
             //处理消息
             Bundle bundle=msg.getData();
             //获取歌曲长度和当前播放位置，并设置到进度条上
-            int currentPosition = bundle.getInt("current_position");
-            String currentPositionStr = bundle.getString("current_position_str");
-            playerSeekBar.setProgress(currentPosition);
-            music_current_pos.setText(currentPositionStr);
-            String durationString = bundle.getString("duration_string");
             int durationInt = bundle.getInt("duration_int");
             String title = bundle.getString("name");
+            int currentPosition = bundle.getInt("current_position");
+            String currentPositionStr = bundle.getString("current_position_str");
+            String durationString = bundle.getString("duration_string");
+
             playerSeekBar.setMax(durationInt);
-            playerSeekBar.setProgress(0);
             music_duration.setText(durationString);
+            playerSeekBar.setProgress(currentPosition);
+            music_current_pos.setText(currentPositionStr);
             toolbar.setTitle(title);
         }
     };

@@ -75,6 +75,10 @@ public class FragmentMusicList extends Fragment {
             public void onClick(View v) {
                 MusicActivity musicActivity = (MusicActivity) getActivity();
                 assert musicActivity != null;
+                if (MusicPlayer.getDefault().getIsInit()){
+                    PlayEvent.getDefault().setAction(PlayEvent.Action.PlayTarget);
+                    mMyBinder.callMusicService(PlayEvent.getDefault());
+                }
                 musicActivity.setTabSelect(1);
             }
         });

@@ -1,20 +1,17 @@
 package com.xiaoxintech.xiaoxinplayer.Activity;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.xiaoxintech.xiaoxinplayer.Fragments.home.FragmentHome;
-import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentMessage;
+import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentVideo;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentMine;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentSettings;
 import com.xiaoxintech.xiaoxinplayer.R;
@@ -88,15 +85,15 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     ft.show(homeFragment);
                 }
-                textView1.setTextColor(Color.parseColor("#1C86EE"));
+                textView1.setTextColor(Color.parseColor("#03DAC5"));
                 break;
             case 1:
                 if (messageFragment==null){
-                    messageFragment=new FragmentMessage();
+                    messageFragment=new FragmentVideo();
                     ft.add(R.id.home_content,messageFragment);
                 }
                 ft.show(messageFragment);
-                textView2.setTextColor(Color.parseColor("#1C86EE"));
+                textView2.setTextColor(Color.parseColor("#03DAC5"));
                 break;
             case 2:
                 if (mineFragment==null){
@@ -105,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 ft.show(mineFragment);
-                textView3.setTextColor(Color.parseColor("#1C86EE"));
+                textView3.setTextColor(Color.parseColor("#03DAC5"));
                 break;
             case 3:
                 if (settingFragment==null){
@@ -113,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                     ft.add(R.id.home_content,settingFragment);
                 }
                 ft.show(settingFragment);
-                textView4.setTextColor(Color.parseColor("#1C86EE"));
+                textView4.setTextColor(Color.parseColor("#03DAC5"));
                 break;
         }
         ft.commit();
@@ -121,10 +118,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initTextColor() {
         //一般情况下点击之后图标和文字都会改变颜色，我这里只做了文字颜色的改变，图标同理
-        textView1.setTextColor(Color.parseColor("#FF0000"));
-        textView2.setTextColor(Color.parseColor("#FF0000"));
-        textView3.setTextColor(Color.parseColor("#FF0000"));
-        textView4.setTextColor(Color.parseColor("#FF0000"));
+        textView1.setTextColor(Color.parseColor("#1C86EE"));
+        textView2.setTextColor(Color.parseColor("#1C86EE"));
+        textView3.setTextColor(Color.parseColor("#1C86EE"));
+        textView4.setTextColor(Color.parseColor("#1C86EE"));
     }
 
     //避免页面覆盖

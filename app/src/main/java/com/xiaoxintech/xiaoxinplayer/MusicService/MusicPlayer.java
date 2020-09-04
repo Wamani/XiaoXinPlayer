@@ -20,6 +20,7 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {
     private static int mQueueIndex;
     private PlayMode mPlayMode;
     private FFmpegMediaMetadataRetriever mmr = new FFmpegMediaMetadataRetriever();
+    private boolean isInit = true;
     public enum PlayMode {
         LOOP, RANDOM, REPEAT
     }
@@ -55,6 +56,9 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {
     }
     public void play(Song song) {
         try {
+            if (isInit){
+                isInit = false;
+            }
             mMediaPlayer.reset();
             if(song.getPlayPath().equals("")){
                 song.setPlayPath(proxy.getProxyUrl(song.getPath(), true));
@@ -219,6 +223,9 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {
         mMediaPlayer.seekTo(positon);
     }
 
+    public boolean getIsInit(){
+        return isInit;
+    }
     public void seekPlayProgress(){
         //计时器对象
         final Timer timer=new Timer();

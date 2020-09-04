@@ -1,6 +1,5 @@
 package com.xiaoxintech.xiaoxinplayer.Fragments.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +27,7 @@ public class FragmentHome extends Fragment  {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_home,container,false);
+        View view=inflater.inflate(R.layout.fragment_music,container,false);
         //初始化viewpager
         viewPager=view.findViewById(R.id.pager);
         //初始化tablayout
