@@ -1,4 +1,4 @@
-package com.xiaoxintech.xiaoxinplayer.Fragments.home;
+package com.xiaoxintech.xiaoxinplayer.Fragments.Music;
 
 import androidx.lifecycle.ViewModel;
 

@@ -1,4 +1,4 @@
-package com.xiaoxintech.xiaoxinplayer.Fragments.home;
+package com.xiaoxintech.xiaoxinplayer.Fragments.Music;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +16,7 @@ import com.xiaoxintech.xiaoxinplayer.R;
 
 import java.util.ArrayList;
 
-public class FragmentHome extends Fragment  {
+public class FragmentMusic extends Fragment  {
 
     private ViewPager viewPager;
     private ArrayList<Fragment> list=new ArrayList<>();
