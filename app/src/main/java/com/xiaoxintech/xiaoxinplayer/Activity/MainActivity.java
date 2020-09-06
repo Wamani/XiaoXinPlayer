@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.xiaoxintech.xiaoxinplayer.Fragments.home.FragmentHome;
+import com.xiaoxintech.xiaoxinplayer.Fragments.Music.FragmentMusic;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentVideo;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentMine;
 import com.xiaoxintech.xiaoxinplayer.Fragments.FragmentSettings;
+import com.xiaoxintech.xiaoxinplayer.MusicService.PlayEvent;
 import com.xiaoxintech.xiaoxinplayer.R;
 
 
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         //默认选中第一个Fragment，也就是主页的Fragment
         setTabSelect(0);
         context = this;
+
+        if (PlayEvent.FileInfo.size() == 0){
+            PlayEvent.getDefault();
+        }
     }
 
     View.OnClickListener listener=new View.OnClickListener() {
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         switch (index){
             case 0:
                 if (homeFragment==null){
-                    homeFragment=new FragmentHome();
+                    homeFragment=new FragmentMusic();
                     ft.add(R.id.home_content,homeFragment);
                 }else {
                     ft.show(homeFragment);

@@ -159,7 +159,6 @@ public class FragmentPlaying extends Fragment {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mMyBinder = (PlayerService.MyBinder) service;
-            mMyBinder.callMusicService(PlayEvent.getDefault());
         }
 
         @Override

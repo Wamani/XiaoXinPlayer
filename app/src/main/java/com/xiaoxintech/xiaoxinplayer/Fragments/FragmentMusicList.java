@@ -43,7 +43,6 @@ public class FragmentMusicList extends Fragment {
     private TextView currentSong, currentAuthor;
     public ArrayList<Music> musicList = new ArrayList<>();
     MusicListAdapter adapter = new MusicListAdapter(musicList);
-    List<Song> queue = new ArrayList<>();
     public static FragmentMusicList newInstance() {
         return new FragmentMusicList();
     }
@@ -65,7 +64,6 @@ public class FragmentMusicList extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new Thread(runnable).start();
         // 最下方
         currentSong = view.findViewById(R.id.musicNameCurrent);
         currentAuthor = view.findViewById(R.id.musicAuthorCurrent);
@@ -77,6 +75,7 @@ public class FragmentMusicList extends Fragment {
                 assert musicActivity != null;
                 if (MusicPlayer.getDefault().getIsInit()){
                     PlayEvent.getDefault().setAction(PlayEvent.Action.PlayTarget);
+                    while (mMyBinder == null){}
                     mMyBinder.callMusicService(PlayEvent.getDefault());
                 }
                 musicActivity.setTabSelect(1);
@@ -117,65 +116,13 @@ public class FragmentMusicList extends Fragment {
                 Toast.makeText(view.getContext(),"long click " + position + " item", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    Runnable runnable = new Runnable(){
-        @Override
-        public void run() {
-            Message msg = new Message();
-            Bundle data = new Bundle();
-            String res = HttpUtils.GetFileList("list");
-            if(res.contains("failed")){
-                Looper.prepare();
-                Toast.makeText(getContext(), res, Toast.LENGTH_LONG).show();
-                Looper.loop();// 进入loop中的循环，查看消息队列
-                return;
-            }
-            data.putString("value", res);
-            msg.setData(data);
-            handler.sendMessage(msg);
-        }
-    };
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Bundle data = msg.getData();
-            // decode response
-            String val = data.getString("value");
-            Gson gson = new Gson();
-            Type type = new TypeToken<ResResult<Music>>(){}.getType();
-            ResResult<Music> response = gson.fromJson(val, type);
-            List<Music> file_infos = response.file_infos;
-            musicList.clear();
-            musicList.addAll(file_infos);
-            // update view
-            adapter.notifyDataSetChanged();
-            // set music list to music service
-            for (Music music : musicList) {
-                String musicUrl = getMusicUrl(music.getName());
-                queue.add(getSong(musicUrl));
-            }
-            PlayEvent.getDefault().setQueue(queue);
-            PlayEvent.getDefault().setAction(PlayEvent.Action.INIT);
-            if (mMyBinder != null) {
-                mMyBinder.callMusicService(PlayEvent.getDefault());
-            }
-            updateCurrentBarInfo();
-        }
-    };
+        musicList.clear();
 
-
-    private Song getSong(String url) {
-        Song song = new Song();
-        song.setPath(url);
-        return song;
-    }
-
-
-    private String getMusicUrl(String name) {
-        return HttpUtils.GetRootURL()+"file?path=" + name;
+        musicList.addAll(PlayEvent.FileInfo);
+        // update view
+        adapter.notifyDataSetChanged();
+        updateCurrentBarInfo();
     }
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
