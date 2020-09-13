@@ -1,10 +1,8 @@
 package com.xiaoxintech.xiaoxinplayer.Fragments;
 
-import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.os.*;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,22 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.xiaoxintech.xiaoxinplayer.Activity.MusicActivity;
-import com.xiaoxintech.xiaoxinplayer.Api.HttpUtils;
 import com.xiaoxintech.xiaoxinplayer.Data.Music;
-import com.xiaoxintech.xiaoxinplayer.Data.ResResult;
 import com.xiaoxintech.xiaoxinplayer.Adapter.MusicListAdapter;
 import com.xiaoxintech.xiaoxinplayer.MusicService.MusicPlayer;
 import com.xiaoxintech.xiaoxinplayer.MusicService.PlayEvent;
 import com.xiaoxintech.xiaoxinplayer.MusicService.PlayerService;
-import com.xiaoxintech.xiaoxinplayer.MusicService.Song;
 import com.xiaoxintech.xiaoxinplayer.R;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import static android.content.Context.BIND_AUTO_CREATE;

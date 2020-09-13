@@ -23,6 +23,7 @@ import com.xiaoxintech.xiaoxinplayer.MusicService.MusicPlayer;
 import com.xiaoxintech.xiaoxinplayer.MusicService.PlayEvent;
 import com.xiaoxintech.xiaoxinplayer.MusicService.PlayerService;
 import com.xiaoxintech.xiaoxinplayer.R;
+import com.xiaoxintech.xiaoxinplayer.Utils.Common;
 
 import static android.content.Context.BIND_AUTO_CREATE;
 
@@ -179,17 +180,6 @@ public class FragmentPlaying extends Fragment {
             getActivity().unbindService(mServiceConnection);
         }
     }
-    /**
-     * 将toast封装起来，连续点击时可以覆盖上一个
-     */
-    public void ShowToast(String text){
-        if(toast == null) {
-            toast = Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT);
-        }else {
-            toast.setText(text);
-        }
-        toast.show();
-    }
 
     public static Handler timerHandler = new Handler() {
         @Override
@@ -215,15 +205,15 @@ public class FragmentPlaying extends Fragment {
         switch (play_index){
             case 0:
                 play_mode.setImageDrawable(getResources().getDrawable(R.drawable.play_icn_loop));
-                ShowToast("顺序播放");
+                Common.getInstance().ShowToast("顺序播放", getActivity());
                 break;
             case 1:
                 play_mode.setImageDrawable(getResources().getDrawable(R.drawable.play_icn_shuffle));
-                ShowToast("随机播放");
+                Common.getInstance().ShowToast("随机播放", getActivity());
                 break;
             case 2:
                 play_mode.setImageDrawable(getResources().getDrawable(R.drawable.play_icn_one));
-                ShowToast("单曲循环");
+                Common.getInstance().ShowToast("单曲循环", getActivity());
                 break;
             default:
                 break;

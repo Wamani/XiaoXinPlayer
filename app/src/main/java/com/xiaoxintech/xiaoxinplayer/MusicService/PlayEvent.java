@@ -1,12 +1,11 @@
 package com.xiaoxintech.xiaoxinplayer.MusicService;
 
-import android.annotation.SuppressLint;
 import android.os.Looper;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xiaoxintech.xiaoxinplayer.Activity.MainActivity;
-import com.xiaoxintech.xiaoxinplayer.Api.HttpUtils;
+import com.xiaoxintech.xiaoxinplayer.Utils.HttpUtils;
 import com.xiaoxintech.xiaoxinplayer.Data.Music;
 import com.xiaoxintech.xiaoxinplayer.Data.ResResult;
 
@@ -87,7 +86,7 @@ public class PlayEvent {
     static Runnable runnable = new Runnable(){
         @Override
         public void run() {
-            String res = HttpUtils.GetFileList("list");
+            String res = HttpUtils.getInstance().GetFileList("list");
             if(res.contains("failed")){
                 Looper.prepare();
                 Toast.makeText(MainActivity.context, res, Toast.LENGTH_LONG).show();
@@ -109,7 +108,7 @@ public class PlayEvent {
         }
     };
     private static String getMusicUrl(String name) {
-        return HttpUtils.GetRootURL()+"file?path=" + name;
+        return HttpUtils.getInstance().GetRootURL() + "file?path=" + name;
     }
 
     private static Song getSong(String url) {
